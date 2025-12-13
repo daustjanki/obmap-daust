@@ -10,9 +10,9 @@ export const graphFeature: Feature = {
   version: '1.0.0',
   dependencies: ['core', 'vault'],
   services: [
-    { name: 'GraphService', factory: async () => { const { GraphService } = await import('@/services/graph/GraphService'); return new GraphService(); }, singleton: true },
-    { name: 'RelationshipMapper', factory: async () => { const { RelationshipMapper } = await import('@/services/graph/RelationshipMapper'); return new RelationshipMapper(); }, singleton: true },
-    { name: 'ZipImportService', factory: async () => { const { ZipImportService } = await import('@/services/graph/ZipImportService'); return new ZipImportService(); }, singleton: true },
+    { name: 'GraphService', factory: async () => { const { GraphService } = await import('./services/GraphService'); return new GraphService(); }, singleton: true },
+    { name: 'RelationshipMapper', factory: async () => { const { RelationshipMapper } = await import('./services/RelationshipMapper'); return new RelationshipMapper(); }, singleton: true },
+    { name: 'ZipImportService', factory: async () => { const { ZipImportService } = await import('./services/ZipImportService'); return new ZipImportService(); }, singleton: true },
   ],
   components: {
     NetworkGraph: () => import('./components/NetworkGraph'),
