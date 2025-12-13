@@ -10,7 +10,7 @@ export const syncFeature: Feature = {
   version: '1.0.0',
   dependencies: ['core', 'vault'],
   services: [
-    { name: 'BackgroundSyncService', factory: async () => { const { BackgroundSyncService } = await import('@/services/sync/BackgroundSyncService'); return new BackgroundSyncService(); }, singleton: true },
+    { name: 'BackgroundSyncService', factory: async () => { const { BackgroundSyncService } = await import('./services/BackgroundSyncService'); return new BackgroundSyncService(); }, singleton: true },
   ],
   components: {
     AutoSaveIndicator: () => import('./components/AutoSaveIndicator'),

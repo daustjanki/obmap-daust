@@ -12,8 +12,8 @@ export const coreFeature: Feature = {
   version: '1.0.0',
   dependencies: [],
   services: [
-    { name: 'EventBus', factory: () => eventBus, singleton: true },
-    { name: 'Container', factory: () => container, singleton: true },
+    { name: 'EventBus', factory: async () => eventBus, singleton: true },
+    { name: 'Container', factory: async () => container, singleton: true },
   ],
   components: {
     ErrorBoundary: () => import('./components/common/ErrorBoundary'),

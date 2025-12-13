@@ -10,10 +10,10 @@ export const vaultFeature: Feature = {
   version: '1.0.0',
   dependencies: ['core'],
   services: [
-    { name: 'VaultManager', factory: async () => { const { getVaultManager } = await import('@/services/vault/VaultManagerSingleton'); return getVaultManager(); }, singleton: true },
-    { name: 'VaultStorage', factory: async () => { const { VaultStorage } = await import('@/services/vault/VaultStorage'); return new VaultStorage(); }, singleton: true },
-    { name: 'VaultSyncService', factory: async () => { const { VaultSyncService } = await import('@/services/vault/VaultSyncService'); return new VaultSyncService(); }, singleton: true },
-    { name: 'VaultBackupService', factory: async () => { const { VaultBackupService } = await import('@/services/vault/VaultBackupService'); return new VaultBackupService(); }, singleton: true },
+    { name: 'VaultManager', factory: async () => { const { getVaultManager } = await import('./services/VaultManagerSingleton'); return getVaultManager(); }, singleton: true },
+    { name: 'VaultStorage', factory: async () => { const { VaultStorage } = await import('./services/VaultStorage'); return new VaultStorage(); }, singleton: true },
+    { name: 'VaultSyncService', factory: async () => { const { VaultSyncService } = await import('./services/VaultSyncService'); return new VaultSyncService(); }, singleton: true },
+    { name: 'VaultBackupService', factory: async () => { const { VaultBackupService } = await import('./services/VaultBackupService'); return new VaultBackupService(); }, singleton: true },
   ],
   components: {
     VaultDashboard: () => import('@/pages/VaultDashboard'),

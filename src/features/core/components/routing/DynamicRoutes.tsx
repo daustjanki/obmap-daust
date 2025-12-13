@@ -8,7 +8,7 @@ import React, { lazy, Suspense, useMemo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { pluginRegistry, type RouteConfig } from '@/features/core/services/plugin-registry';
 import { ProtectedRoute } from '@/features/core/components/common/ProtectedRoute';
-import { useFeatureConfigStore } from '@/services/ui/stores/useFeatureConfigStore';
+import { useFeatureConfigStore } from '@/shared/stores';
 
 // Static page imports for core routes that must always be available
 const Landing = lazy(() => import('@/pages/Landing'));

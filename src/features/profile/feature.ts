@@ -10,7 +10,7 @@ export const profileFeature: Feature = {
   version: '1.0.0',
   dependencies: ['core', 'auth'],
   services: [
-    { name: 'ApiKeyService', factory: async () => { const { ApiKeyService } = await import('@/services/apikeys/ApiKeyService'); return new ApiKeyService(); }, singleton: true },
+    { name: 'ApiKeyService', factory: async () => { const { ApiKeyService } = await import('./services/ApiKeyService'); return new ApiKeyService(); }, singleton: true },
   ],
   components: {
     ProfileSettings: () => import('./components/ProfileSettings'),
