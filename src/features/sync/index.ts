@@ -13,4 +13,4 @@ export { AutoSaveIndicator } from './components/AutoSaveIndicator';
 export { usePWA } from './hooks/usePWA';
 
 // Services
-export { BackgroundSyncService } from '@/services/sync/BackgroundSyncService';
+export { BackgroundSyncService } from './services/BackgroundSyncService';

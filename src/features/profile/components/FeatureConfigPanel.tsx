@@ -5,22 +5,22 @@
  */
 
 import { useEffect, useMemo, useCallback, useState } from 'react';
-import { useFeatureConfigStore } from '@/services/ui/stores/useFeatureConfigStore';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/core/ui/card';
-import { Switch } from '@/components/core/ui/switch';
-import { Badge } from '@/components/core/ui/badge';
-import { Button } from '@/components/core/ui/button';
-import { Separator } from '@/components/core/ui/separator';
+import { useFeatureConfigStore } from '@/shared/stores';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Switch } from '@/shared/ui/switch';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
+import { Separator } from '@/shared/ui/separator';
 import { 
   Tooltip, 
   TooltipContent, 
   TooltipTrigger 
-} from '@/components/core/ui/tooltip';
+} from '@/shared/ui/tooltip';
 import { 
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/core/ui/collapsible';
+} from '@/shared/ui/collapsible';
 import { 
   Package, 
   ChevronDown, 
@@ -32,7 +32,7 @@ import {
   Info,
   Lock
 } from 'lucide-react';
-import { cn } from '@/services/core/utils/cn';
+import { cn } from '@/shared/lib';
 import { toast } from 'sonner';
 
 interface FeatureCardProps {

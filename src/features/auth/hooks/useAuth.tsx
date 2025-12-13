@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { supabase } from "@/services/integrations/supabase/client";
+import { supabase } from "@/shared/integrations/supabase/client";
 import { toast } from 'sonner';
-import type { Json } from "@/services/integrations/supabase/types";
-import { vaultSyncService } from '@/services/vault/VaultSyncService';
+import type { Json } from "@/shared/integrations/supabase/types";
+import { vaultSyncService } from '@/features/vault/services/VaultSyncService';
 
 interface Profile {
   id: string;

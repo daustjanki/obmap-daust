@@ -3,7 +3,7 @@ import { NetworkGraph, NodePanel, GraphConfigPanel, useAutoLinks } from '@/featu
 import { UnifiedLayout, PWAInstallPrompt, PWAStatusBadge } from '@/features/core';
 import { SyncStatusIndicator, AutoSaveIndicator, OfflineIndicator } from '@/features/sync';
 import { toast } from 'sonner';
-import { extractMentions } from '@/services/content/markdown-parser';
+import { extractMentions } from '@/shared/services/markdown-parser';
 import { getVaultManager, vaultSyncService } from '@/features/vault';
 import { useAuth } from "@/features/auth";
 import { 
@@ -14,7 +14,7 @@ import {
   type GraphData, 
   type Backlink,
   type GraphConfigState,
-} from '@/services/ui/stores';
+} from '@/shared/stores';
 
 const Index = () => {
   const vaultManager = getVaultManager();

@@ -11,4 +11,4 @@ export { AvatarUpload } from './components/AvatarUpload';
 export { FeatureConfigPanel } from './components/FeatureConfigPanel';
 
 // Services
-export { ApiKeyService } from '@/services/apikeys/ApiKeyService';
+export { ApiKeyService } from './services/ApiKeyService';
