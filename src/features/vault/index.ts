@@ -20,11 +20,11 @@ export { useVaultEvents } from './hooks/useVaultEvents';
 export { useVaultSync } from './hooks/useVaultSync';
 
 // Services
-export { VaultManager } from '@/services/vault/VaultManager';
-export { getVaultManager } from '@/services/vault/VaultManagerSingleton';
-export { VaultStorage } from '@/services/vault/VaultStorage';
-export { VaultHistory } from '@/services/vault/VaultHistory';
-export { VaultBackupService } from '@/services/vault/VaultBackupService';
-export { VaultSyncService, vaultSyncService } from '@/services/vault/VaultSyncService';
-export { CloudVaultService } from '@/services/vault/CloudVaultService';
-export type { VaultData, VaultMetadata, StorageStrategy } from '@/services/vault/types';
+export { VaultManager } from './services/VaultManager';
+export { getVaultManager } from './services/VaultManagerSingleton';
+export { VaultStorage } from './services/VaultStorage';
+export { VaultHistory } from './services/VaultHistory';
+export { VaultBackupService } from './services/VaultBackupService';
+export { VaultSyncService, vaultSyncService } from './services/VaultSyncService';
+export { CloudVaultService } from './services/CloudVaultService';
+export type { VaultData, VaultMetadata, StorageStrategy } from './services/types';

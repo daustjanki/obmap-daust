@@ -11,9 +11,9 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { toast } from 'sonner';
-import { FileSystemService } from '@/services/persistence/FileSystemService';
-import { GraphService } from '@/services/graph/GraphService';
-import type { GraphConfigState } from "@/services/ui/stores/useGraphStore";
+import { FileSystemService } from '@/shared/services/FileSystemService';
+import { GraphService } from '@/features/graph/services/GraphService';
+import type { GraphConfigState } from "@/shared/stores";
 
 interface Node {
   id: string;

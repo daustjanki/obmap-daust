@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "@/features/auth";
 import { ProfileSettings } from "@/features/profile";
-import { Button } from "@/components/core/ui/button";
+import { Button } from "@/shared/ui/button";
 import { ArrowLeft, Loader2, LogOut } from 'lucide-react';
 
 export default function Profile() {

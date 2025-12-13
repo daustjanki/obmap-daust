@@ -1,12 +1,12 @@
-import { Toaster } from "@/components/core/ui/toaster";
-import { Toaster as Sonner } from "@/components/core/ui/sonner";
-import { TooltipProvider } from "@/components/core/ui/tooltip";
+import { Toaster } from "@/shared/ui/toaster";
+import { Toaster as Sonner } from "@/shared/ui/sonner";
+import { TooltipProvider } from "@/shared/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary, EventDebugPanel, DynamicRoutes, initializeFeatureLoader } from "@/features/core";
 import { AuthProvider } from "@/features/auth";
 import { Suspense, useEffect, useState } from "react";
-import { useFeatureConfigStore } from "@/services/ui/stores/useFeatureConfigStore";
+import { useFeatureConfigStore } from "@/shared/stores";
 
 const queryClient = new QueryClient();
 

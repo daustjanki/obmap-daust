@@ -2,18 +2,18 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useAuth } from "@/components/auth/hooks/useAuth";
+import { useAuth } from "@/features/auth";
 import { AvatarUpload } from './AvatarUpload';
 import { ApiKeyManager } from './ApiKeyManager';
 import { FeatureConfigPanel } from './FeatureConfigPanel';
-import { Button } from "@/components/core/ui/button";
-import { Input } from "@/components/core/ui/input";
-import { Label } from "@/components/core/ui/label";
-import { Textarea } from "@/components/core/ui/textarea";
-import { Switch } from "@/components/core/ui/switch";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/core/ui/card";
-import { Separator } from "@/components/core/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/core/ui/tabs";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
+import { Label } from "@/shared/ui/label";
+import { Textarea } from "@/shared/ui/textarea";
+import { Switch } from "@/shared/ui/switch";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/ui/card";
+import { Separator } from "@/shared/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,7 +24,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/core/ui/alert-dialog";
+} from "@/shared/ui/alert-dialog";
 import { Loader2, Save, Trash2, Lock, User, Package, Key } from 'lucide-react';
 import { toast } from 'sonner';
 

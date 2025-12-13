@@ -18,6 +18,6 @@ export { GraphConfigPanel } from './components/config-panel';
 export { useAutoLinks } from './hooks/useAutoLinks';
 
 // Services
-export { GraphService } from '@/services/graph/GraphService';
-export { RelationshipMapper } from '@/services/graph/RelationshipMapper';
-export { ZipImportService } from '@/services/graph/ZipImportService';
+export { GraphService } from './services/GraphService';
+export { RelationshipMapper } from './services/RelationshipMapper';
+export { ZipImportService } from './services/ZipImportService';
