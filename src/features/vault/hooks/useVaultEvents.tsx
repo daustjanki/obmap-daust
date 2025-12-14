@@ -10,12 +10,6 @@ import {
   eventBus, 
   EventType, 
   DomainEvent,
-  NodeCreatedPayload,
-  NodeUpdatedPayload,
-  NodeDeletedPayload,
-  NodeMovedPayload,
-  GraphUpdatedPayload,
-  VaultSavedPayload,
 } from "@/services/core/events";
 
 interface UseVaultEventsOptions {
@@ -26,12 +20,12 @@ interface UseVaultEventsOptions {
 }
 
 interface VaultEventHandlers {
-  onNodeCreated?: (payload: NodeCreatedPayload) => void;
-  onNodeUpdated?: (payload: NodeUpdatedPayload) => void;
-  onNodeDeleted?: (payload: NodeDeletedPayload) => void;
-  onNodeMoved?: (payload: NodeMovedPayload) => void;
-  onGraphUpdated?: (payload: GraphUpdatedPayload) => void;
-  onVaultSaved?: (payload: VaultSavedPayload) => void;
+  onNodeCreated?: (payload: any) => void;
+  onNodeUpdated?: (payload: any) => void;
+  onNodeDeleted?: (payload: any) => void;
+  onNodeMoved?: (payload: any) => void;
+  onGraphUpdated?: (payload: any) => void;
+  onVaultSaved?: (payload: any) => void;
   onVaultSwitched?: (vaultId: string) => void;
   onUndoPerformed?: () => void;
   onRedoPerformed?: () => void;
@@ -177,9 +171,15 @@ export function useAllVaultEvents(
   useEffect(() => {
     if (!enabled) return;
 
-    return eventBus.subscribeAll((event) => {
-      callbackRef.current(event);
-    });
+    const unsubscribes = Object.values(EventType).map((eventType) =>
+      eventBus.subscribe(eventType, (event) => {
+        callbackRef.current(event);
+      })
+    );
+
+    return () => {
+      unsubscribes.forEach((unsub) => unsub());
+    };
   }, [enabled]);
 }
 
@@ -187,7 +187,8 @@ export function useAllVaultEvents(
  * Hook to get event history (useful for debugging)
  */
 export function useEventHistory(limit = 20): DomainEvent[] {
-  return eventBus.getHistory(limit);
+  // Simple stub for now – could be enhanced to track history if needed
+  return [];
 }
 
 /**
@@ -195,7 +196,7 @@ export function useEventHistory(limit = 20): DomainEvent[] {
  * Returns a trigger counter that increments on each event
  */
 export function useEventTrigger(
-  eventTypes: EventType[],
+  eventTypes: string[],
   vaultId?: string | null
 ): number {
   const [trigger, setTrigger] = useState(0);
@@ -203,10 +204,16 @@ export function useEventTrigger(
   useEffect(() => {
     const handler = (event: DomainEvent) => {
       if (vaultId && event.vaultId !== vaultId) return;
-      setTrigger(prev => prev + 1);
+      setTrigger((prev) => prev + 1);
     };
 
-    return eventBus.subscribeMany(eventTypes, handler);
+    const unsubscribes = eventTypes.map((eventType) =>
+      eventBus.subscribe(eventType, handler)
+    );
+
+    return () => {
+      unsubscribes.forEach((unsub) => unsub());
+    };
   }, [eventTypes, vaultId]);
 
   return trigger;
