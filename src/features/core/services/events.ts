@@ -1,8 +1,7 @@
 /**
  * Core Services - Events
+ * Browser-compatible event bus implementation
  */
-
-import { EventEmitter } from 'events';
 
 export const EventType = {
   VAULT_CREATED: 'vault:created',
@@ -32,23 +31,46 @@ export type EventTypeValue = typeof EventType[keyof typeof EventType];
 
 // Domain event interface for typed events
 export interface DomainEvent<T = any> {
-  type: EventTypeValue;
+  type: EventTypeValue | string;
   payload: T;
   timestamp: number;
   vaultId?: string;
 }
 
-class TypedEventBus extends EventEmitter {
+type Listener = (...args: any[]) => void;
+
+class TypedEventBus {
+  private listeners: Map<string, Set<Listener>> = new Map();
+
   emit(event: EventTypeValue | string, payload?: any): boolean {
-    return super.emit(event, payload);
+    const eventListeners = this.listeners.get(event);
+    if (!eventListeners || eventListeners.size === 0) {
+      return false;
+    }
+    eventListeners.forEach((listener) => {
+      try {
+        listener(payload);
+      } catch (error) {
+        console.error(`[EventBus] Error in listener for ${event}:`, error);
+      }
+    });
+    return true;
   }
 
-  on(event: EventTypeValue | string, listener: (...args: any[]) => void): this {
-    return super.on(event, listener);
+  on(event: EventTypeValue | string, listener: Listener): this {
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, new Set());
+    }
+    this.listeners.get(event)!.add(listener);
+    return this;
   }
 
-  off(event: EventTypeValue | string, listener: (...args: any[]) => void): this {
-    return super.off(event, listener);
+  off(event: EventTypeValue | string, listener: Listener): this {
+    const eventListeners = this.listeners.get(event);
+    if (eventListeners) {
+      eventListeners.delete(listener);
+    }
+    return this;
   }
 
   subscribe<T = any>(event: EventTypeValue | string, listener: (event: DomainEvent<T>) => void): () => void {
