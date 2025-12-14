@@ -73,10 +73,10 @@ function DynamicRoute({ route, featureId, featureName }: DynamicRouteProps) {
       return lazy(async () => {
         try {
           const module = await feature.components![route.component]();
-          if (module.default) {
-            return module;
+          if ('default' in module) {
+            return module as { default: React.ComponentType<any> };
           }
-          const Comp = module[route.component] || Object.values(module)[0];
+          const Comp = (module as Record<string, React.ComponentType<any>>)[route.component] || Object.values(module)[0];
           return { default: Comp };
         } catch (error) {
           console.error(`Failed to load component ${route.component}:`, error);
@@ -107,7 +107,7 @@ function DynamicRoute({ route, featureId, featureName }: DynamicRouteProps) {
   
   const element = (
     <Suspense fallback={<LoadingFallback />}>
-      <Component {...(route.props || {})} />
+      <Component />
     </Suspense>
   );
   

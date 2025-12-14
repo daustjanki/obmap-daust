@@ -152,10 +152,10 @@ export function createLazyComponent(
   return lazy(async () => {
     try {
       const module = await factory();
-      if (module.default) {
-        return module;
+      if ('default' in module) {
+        return module as { default: React.ComponentType<any> };
       }
-      const Component = module[componentName] || Object.values(module)[0];
+      const Component = (module as Record<string, React.ComponentType<any>>)[componentName] || Object.values(module)[0];
       return { default: Component };
     } catch (error) {
       console.error(`[FeatureLoader] Failed to load component ${componentName}:`, error);
@@ -196,10 +196,10 @@ export function createGlobalLazyComponent(
 
     try {
       const module = await factory();
-      if (module.default) {
-        return module;
+      if ('default' in module) {
+        return module as { default: React.ComponentType<any> };
       }
-      const Component = module[componentName] || Object.values(module)[0];
+      const Component = (module as Record<string, React.ComponentType<any>>)[componentName] || Object.values(module)[0];
       return { default: Component };
     } catch (error) {
       console.error(`[FeatureLoader] Failed to load component ${componentName}:`, error);

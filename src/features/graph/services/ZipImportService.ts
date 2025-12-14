@@ -152,7 +152,7 @@ export class ZipImportService {
       return a.split('/').length - b.split('/').length;
     });
 
-    // Emit vault opened event
+    // Emit folder created events for root
     if (sortedFolders.length > 0) {
       const rootName = sortedFolders[0].split('/')[0];
       const rootId = 'folder-root';
