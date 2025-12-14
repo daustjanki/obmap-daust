@@ -7,7 +7,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useAllVaultEvents, useEventHistory, EventType } from "@/features/vault/hooks/useVaultEvents";
-import { eventBus } from "@/features/core/services/events";
+import { eventBus, DomainEvent } from "@/features/core/services/events";
 import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
 import { ScrollArea } from "@/shared/ui/scroll-area";
