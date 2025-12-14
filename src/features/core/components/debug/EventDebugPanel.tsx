@@ -34,7 +34,7 @@ interface EventLogEntry {
   timestamp: Date;
 }
 
-const eventTypeColors: Partial<Record<EventType, string>> = {
+const eventTypeColors: Partial<Record<string, string>> = {
   [EventType.NODE_CREATED]: 'bg-green-500/20 text-green-400 border-green-500/30',
   [EventType.NODE_UPDATED]: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   [EventType.NODE_DELETED]: 'bg-red-500/20 text-red-400 border-red-500/30',
@@ -98,7 +98,7 @@ export function EventDebugPanel() {
     setEvents([]);
   };
 
-  const getEventColor = (type: EventType): string => {
+  const getEventColor = (type: string): string => {
     return eventTypeColors[type] || 'bg-muted text-muted-foreground border-border';
   };
 
@@ -186,7 +186,7 @@ export function EventDebugPanel() {
                 <CollapsibleTrigger className="w-full">
                   <div className={cn(
                     "flex items-center gap-2 p-2 rounded-md border text-left transition-colors hover:bg-muted/50",
-                    getEventColor(entry.event.type as EventType)
+                    getEventColor(entry.event.type)
                   )}>
                     {expandedEvents.has(entry.id) ? (
                       <ChevronDown className="h-3 w-3 flex-shrink-0" />

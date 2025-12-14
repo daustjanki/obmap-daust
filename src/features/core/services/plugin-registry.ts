@@ -153,6 +153,13 @@ class PluginRegistry {
     return components;
   }
 
+  getAllStatuses(): Array<FeatureStatus & { id: string }> {
+    return Array.from(this.features.entries()).map(([id, entry]) => ({
+      id,
+      ...entry.status,
+    }));
+  }
+
   enable(id: string): void {
     const entry = this.features.get(id);
     if (entry) {

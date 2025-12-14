@@ -183,31 +183,37 @@ export function createGlobalLazyComponent(
   componentName: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): React.LazyExoticComponent<ComponentType<any>> {
-  return lazy(async () => {
+  return lazy<React.ComponentType<any>>(async () => {
     const factory = getComponentFactory(componentName);
+
+    const Fallback: React.ComponentType<any> = () =>
+      React.createElement(
+        "div",
+        { className: "p-4 text-destructive" },
+        `Component ${componentName} not found`,
+      );
+
     if (!factory) {
       console.warn(`[FeatureLoader] Component ${componentName} not found`);
-      return { 
-        default: () => React.createElement('div', { 
-          className: 'p-4 text-destructive' 
-        }, `Component ${componentName} not found`)
-      };
+      return { default: Fallback };
     }
 
     try {
       const module = await factory();
-      if ('default' in module) {
-        return module as { default: React.ComponentType<any> };
+      let Component: React.ComponentType<any>;
+
+      if ("default" in module) {
+        Component = module.default as React.ComponentType<any>;
+      } else {
+        Component =
+          (module as Record<string, React.ComponentType<any>>)[componentName] ||
+          (Object.values(module)[0] as React.ComponentType<any>);
       }
-      const Component = (module as Record<string, React.ComponentType<any>>)[componentName] || Object.values(module)[0];
+
       return { default: Component };
     } catch (error) {
       console.error(`[FeatureLoader] Failed to load component ${componentName}:`, error);
-      return { 
-        default: () => React.createElement('div', { 
-          className: 'p-4 text-destructive' 
-        }, `Failed to load ${componentName}`)
-      };
+      return { default: Fallback };
     }
   });
 }
