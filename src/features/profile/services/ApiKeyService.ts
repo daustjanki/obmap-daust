@@ -176,7 +176,12 @@ export class ApiKeyService {
       is_active?: boolean;
     }
   ): Promise<{ error: Error | null }> {
-    const updateData: Record<string, any> = {};
+    const updateData: {
+      name?: string;
+      permissions?: Json;
+      expires_at?: string | null;
+      is_active?: boolean;
+    } = {};
     if (updates.name !== undefined) updateData.name = updates.name;
     if (updates.permissions !== undefined) updateData.permissions = updates.permissions as unknown as Json;
     if (updates.expires_at !== undefined) updateData.expires_at = updates.expires_at;

@@ -158,7 +158,14 @@ export class CloudVaultService {
       backup_config?: Record<string, any>;
     }
   ): Promise<{ error: Error | null }> {
-    const updateData: Record<string, any> = {};
+    const updateData: {
+      name?: string;
+      description?: string;
+      graph_data?: Json;
+      graph_config?: Json;
+      backup_config?: Json;
+      last_synced_at?: string;
+    } = {};
     if (updates.name !== undefined) updateData.name = updates.name;
     if (updates.description !== undefined) updateData.description = updates.description;
     if (updates.graph_data !== undefined) updateData.graph_data = updates.graph_data as unknown as Json;
